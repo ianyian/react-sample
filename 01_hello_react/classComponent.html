@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="test" />
+    <script type="text/babel">
+        class MyComponent extends React.Component {
+            render(){
+                console.log(this);
+                // alert : onClick => "C" is upper case, which designed by react
+                return <h2 id="title" onClick={demo}>this is class component sample</h2>
+            }
+        }
+        ReactDOM.render(<MyComponent />, document.getElementById('test'));
+
+        /*const title = document.getElementById("title");
+        title.addEventListener('click',()=>{
+            console.log('title been clicked1');
+        }) 
+
+        const title = document.getElementById("title");
+        title.onclick = ()=> {
+            console.log('title been clicked2');
+        } */
+
+        function demo()
+        {
+            console.log('title been clicked');
+        }
+
+    </script>
+
+
+</body>
+</html>

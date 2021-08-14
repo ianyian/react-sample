@@ -12,26 +12,13 @@
 </head>
 
 <body>
-    <script type="text/javascript">
-        class Person {
-            constructor(name, age) {
-                this.name = name
-                this.age = age
-            }
-            speak() {
-                console.log(`my name is ${this.name} , age is ${this.age}`);
-            }
+    <script type="text/babel">
+        function MyComponent() {
+            console.log(this);
+            return (<h2> this is function module component</h2>);
         }
 
-        const p1 = new Person('tom', 18)
-        const p2 = new Person('Jarry', 23)
-
-        console.log(p1);
-        console.log(p2);
-        p1.speak();
-        //p2.speak()
-
-        //ReactDOM.render(<MyComponent />, document.getElementById('test'))
+        ReactDOM.render(<MyComponent />, document.getElementById('test'));
     </script>
 
     <div id="test" />

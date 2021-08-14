@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var volve = 99;
+        class Person {
+            // constructor for class is optional
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+                this.school = 'Southern college';
+            }
+            speak() {
+                console.log(`my name is ${this.name} , age is ${this.age} , car is ${volve}`);
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, age, grade) {
+                super(name, age); // assign var to person constuctor, this "super" need in beginning of line
+                this.grade = grade;
+            }
+
+            // override
+            speak() {
+                console.log(`my name is ${this.name} , class ${this.grade}`);
+            }
+
+            study() {
+                console.log('i study very hard .')
+            }
+
+        }
+
+
+        const p1 = new Person('tom', 18)
+        const p2 = new Person('Jarry', 23)
+
+        console.log(p1);
+        console.log(p2);
+        p1.speak();
+        p2.speak();
+
+        const s1 = new Student('Kate', 33, 'level 1');
+        console.log(s1);
+        s1.speak();
+        s1.study();
+        //ReactDOM.render(<MyComponent />, document.getElementById('test'))
+
+        class Car{
+            constructor (name, price)
+            {
+                this.name=name;
+                this.price=price;
+                this.wheel=4;
+            }
+
+            carPlatNumber = 'ABC123'; // carPlatNumber = proprety, 
+
+            //in class level not allow to declare let
+            //let carPlatNumber = 1; this is invalidate statement.
+        }
+
+        const c1 = new Car('Benzc63', 199);
+        const c2 = new Car('BWM',299);
+        console.log(c1);
+        console.log(c2);
+    </script>
+
+    <div id="test" />
+</body>
+
+</html>

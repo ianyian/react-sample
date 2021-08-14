@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">my btn1</button>
+    <button id="btn2">my btn2</button>
+    <button onclick="demo()">my btn3</button>
+
+    <script type="text/javascript">
+        const actionbtn1 = document.getElementById('btn1');
+        actionbtn1.addEventListener('click',()=>{
+            alert('btn1 clicked');
+
+        const actionbtn2 = document.getElementById('btn2');
+        actionbtn2.onclick = ()=>{
+            alert('btn2 clicked');
+        }
+        })
+
+        function demo()
+        {
+            alert('btn3 clicked');
+        }
+    </script>
+</body>
+</html>

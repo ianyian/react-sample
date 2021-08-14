@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="test" />
+    <script type="text/babel">
+
+        class Weather extends React.Component {
+            // execute time = 1
+            constructor(props) {
+                super(props);
+                //this.state={isHot:true,wind:'light'};
+                this.state = { isHot: true, wind: 'light' }; // this.state is KEY word , cannot change to anothers name
+                this.demo = this.changeWeather.bind(this); //demo = this.changeWeather obj
+            }
+
+            // execute time = 1 + n , n is numbers of clicked
+            render() {
+                const { isHot, wind } = this.state; // this.state is KEY word , cannot change to anothers name
+                //return (<h1>Today weather is {this.isHot2 ? 'hot' : 'nice !'} </h1>);
+                return (<h1 onClick={this.demo}>Today weather is {isHot ? 'hot' : 'freeze !'} , {wind} , {Date.now()} </h1>);
+            }
+
+            // execute time = number of clicked
+            changeWeather() {
+                //console.log(this);
+                const isHot = this.state.isHot;
+                console.log(this);
+                //this.state.isHot = !isHot; // wrong ! this statement not possible to change the state value
+                //
+                this.setState({ isHot: !isHot });
+            }
+        }
+
+        ReactDOM.render(<Weather />, document.getElementById("test"));
+    </script>
+    
+</body>
+
+</html>
