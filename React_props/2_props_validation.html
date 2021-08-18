@@ -9,6 +9,9 @@
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- development version -->
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
 </head>
 
 <body>
@@ -32,16 +35,30 @@
             }
         }
 
+        Person.propTypes = {
+            name: PropTypes.string.isRequired,
+            sex: PropTypes.string,
+            speak: PropTypes.func // input only allow function
+        }
 
-        ReactDOM.render(<Person name="tom" age={19} sex="male" />, document.getElementById('test1'))
+        Person.defaultProps = {
+            sex: 'uni'
+        }
 
-        const p = { name: "Jerry", age: 23, sex: "male" };
-        ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex} />, document.getElementById('test2'))
+        function Speak()
+        {
+            console.log("im talking");
+        }
+
+        ReactDOM.render(<Person name="tom" age={19} sex="male" speak={Speak}/>, document.getElementById('test1'))
+
+        const p = { name: "Jerry", age: 3};
+        ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}  />, document.getElementById('test2'))
 
         //React{...p} = bring function list of parameter in
         ReactDOM.render(<Person {...p} />, document.getElementById('test3'))
 
-        const p2 = {...p, name:"Jack", address:"global"};
+        const p2 = { ...p, name: "Jack", address: "global", sex:"male" };
         ReactDOM.render(<Person {...p2} />, document.getElementById('test4'))
 
 

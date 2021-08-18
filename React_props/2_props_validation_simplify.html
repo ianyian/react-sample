@@ -9,16 +9,34 @@
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- development version -->
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
 </head>
 
 <body>
     <div id='test1'></div>
-    <div id='test2'></div>
-    <div id='test3'></div>
-    <div id='test4'></div>
+
 
     <script type="text/babel">
         class Person extends React.Component {
+            constructor(props){
+                super(props);
+                console.log('constructor',this);
+            }
+            static propTypes = {
+                name: PropTypes.string.isRequired,
+                sex: PropTypes.string,
+                speak: PropTypes.func // input only allow function
+            }
+
+            static defaultProps = {
+                sex: 'uni',
+                age: 18
+            }
+
+            state = { isHot: true, wind: 'strong' };
+
             render() {
                 const { name, age, sex } = this.props;
                 //console.log(this);
@@ -32,20 +50,7 @@
             }
         }
 
-
-        ReactDOM.render(<Person name="tom" age={19} sex="male" />, document.getElementById('test1'))
-
-        const p = { name: "Jerry", age: 23, sex: "male" };
-        ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex} />, document.getElementById('test2'))
-
-        //React{...p} = bring function list of parameter in
-        ReactDOM.render(<Person {...p} />, document.getElementById('test3'))
-
-        const p2 = {...p, name:"Jack", address:"global"};
-        ReactDOM.render(<Person {...p2} />, document.getElementById('test4'))
-
-
-
+        ReactDOM.render(<Person name="tom" />, document.getElementById('test1'))
 
     </script>
 
