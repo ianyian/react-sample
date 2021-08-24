@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id='test'></div>
+    <div id='test2'></div>
+    <script type="text/babel">
+
+        class Demo extends React.Component {
+
+            state = { isHot: true, wind: true }
+
+            changeWeather = () => {
+                const { isHot } = this.state;
+                this.setState({ isHot: !isHot });
+            }
+
+            showInfo = () => {
+                const { input1 } = this;
+                alert(input1.value)
+            }
+
+            saveInput = (c) => {
+                this.input99 = c;
+                console.log('@', c);
+            }
+
+            render() {
+                const { isHot } = this.state
+
+                return (
+                    <div>
+                        <h2>today weather is {isHot ? 'very the hot' : 'freeze weather'} </h2>
+                        
+                        {/*this is commonly use*/}
+                        {/*<input ref={(currentNod e) => { this.input1 = currentNode; console.log('@', currentNode); }} type="text" /><br /><br />*/}
+                        
+                        {/*this just to prove the method*/}
+                        <input ref={this.saveInput} type="text" /><br /><br />
+                        
+                        <button onClick={this.showInfo}>click me to display data!</button>
+                        <button onClick={this.changeWeather}>click me to change weather !</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+
+
+    </script>
+</body>
+
+</html>

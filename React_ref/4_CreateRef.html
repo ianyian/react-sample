@@ -13,30 +13,36 @@
 
 <body>
     <div id='test'></div>
+    <div id='test2'></div>
     <script type="text/babel">
+
         class Demo extends React.Component {
-            showData = ()=> {
-                const {input1} = this;
-                alert(input1.value);
+
+            myRef = React.createRef();
+            myRef2 = React.createRef();
+
+            showData = () => {
+                alert(this.myRef.current.value);
             }
 
-            showData2 = ()=> {
-                const {input2} = this;
-                alert(input2.value);
+            showData2 = () => {
+                alert(this.myRef2.current.value);
             }
+
 
             render() {
                 return (
                     <div>
-                        <input ref={c => this.input1=c } type="text" placeholder="click to display" />
-                        <button ref="button100" onClick={this.showData} >click to display left hand data</button>
-                        <input ref={(currentNode) => {this.input2=currentNode} } onBlur={this.showData2} type="text" placeholder="lost focus to display text" />
+                        <input ref={this.myRef} type="text" placeholder="click button to display data" /><br /><br />
+                        <button onClick={this.showData}>click me to display data!</button><br/><br/>
+                        <input onBlur={this.showData2} ref={this.myRef2} type="text" placeholder="lost focus to display data" /><br /><br />  
                     </div>
                 )
             }
         }
 
-        ReactDOM.render(<Demo a="1" b="b"/>, document.getElementById('test'))
+        ReactDOM.render(<Demo />, document.getElementById('test'))
+
 
     </script>
 </body>

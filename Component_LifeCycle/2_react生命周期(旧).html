@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id='test' />
+    <div id='test2' />
+    <script type="text/babel">
+
+        class MyMath extends React.Component {
+
+            constructor(props) {
+                super(props);
+                console.log('MyMath-constructor');
+                this.state = { myCount: 0 };
+            }
+
+            MyAdd = () => {
+                const { myCount } = this.state;
+                this.setState({ myCount: myCount + 1 })
+            }
+
+            MyForceUpdate = () => {
+                this.forceUpdate();
+            }
+
+            Death = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'));
+            }
+
+            componentWillMount() {
+                console.log('MyMath-componentWillMount');
+            }
+
+            // controller , to decide if want to continue go for component update flow
+            shouldComponentUpdate() {
+                console.log('myMath-shouldComponentUpdate');
+                return true;
+            }
+
+            // component before update
+            componentWillUpdate() {
+                console.log('myMath-componentWillupdate');
+            }
+
+            // component after update
+            componentDidUpdate() {
+                console.log('myMath-componentDidUpdate')
+            }
+
+            componentDidMount() {
+                console.log('MyMath-componentDidMount');
+            }
+
+            render() {
+                console.log('MyMath-render');
+                const { myCount } = this.state;
+
+                return (
+                    <div>
+                        <h2>current value : {myCount} </h2>
+                        <button onClick={this.MyAdd}> click me + 1</button>
+                        <button onClick={this.Death}> dispose me !</button>
+                        <button onClick={this.MyForceUpdate}> My Force update !</button>
+                    </div>
+                )
+            }
+        }
+
+        class A extends React.Component {
+            state = {carName:'Merz'};
+
+            changeCar = () => {
+                this.setState({carName:'BMW'});
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>this is class A </h1>
+                        <button onClick={this.changeCar}> change car </button>
+                        <B carName={this.state.carName} />
+                    </div>
+                )
+            }
+        } 
+
+        class B extends React.Component {
+            
+            shouldComponentUpdate(){
+                console.log('classB--> shouldComponentUpdate');
+                return true;
+            }
+
+            componentDidUpdate(){
+                console.log('classB--> componentDidUpdate');
+            }
+
+            componentDidMount()
+            {
+                console.log('classB--> componentDidMount');
+            }
+        
+            componentWillReceiveProps(props){
+                console.log('classB--> componentWillReceiveProps',props)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>this is class B , received car model is : {this.props.carName}</h1>
+                    </div>
+                )
+            }
+        }
+
+
+        //ReactDOM.render(<MyMath />, document.getElementById('test'));
+        ReactDOM.render(<A />, document.getElementById('test2'));
+
+    </script>
+</body>
+
+</html>

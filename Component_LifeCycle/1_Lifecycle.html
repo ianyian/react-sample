@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="test" />
+    <script type="text/babel">
+
+        class Life extends React.Component {
+
+            state = {opacity:1}
+
+            death = () => {
+                //stop timer before unmount, else wil failed
+               // clearInterval(this.myTimer); 
+               // we could delete timer here or componentWillUnmount
+
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'));
+            }
+
+            // before unmount function
+            componentWillUnmount(){
+                clearInterval(this.myTimer);
+            }
+
+            // after component mounted in web page
+            // only one time right after component mounted.
+            componentDidMount(){
+                console.log('componentDidMount, initialed');
+                this.myTimer = setInterval(() => {
+                    let {opacity}=this.state;
+                    opacity -= 0.1;
+                    if (opacity <= 0)
+                    opacity = 1;
+                    console.log('#');
+                    this.setState({opacity:opacity});
+                },200);
+            }
+
+
+            ManualStart =() =>  { // declare arrow function, pointer point to outer this.
+                console.log('@');
+                setInterval(() => {
+                    let {opacity}=this.state;
+                    opacity -= 0.1;
+                    if (opacity <= 0)
+                    opacity = 1;
+                    console.log('#');
+                    this.setState({opacity:opacity});
+                },200);
+            }
+
+            render() {
+                return (
+                <div>
+                    <h1 style  ={{opacity:this.state.opacity}}>How to learn React ... </h1>
+                    <button onClick={this.death}>Disappear ! </button>
+                    <button onClick={this.ManualStart}>Manual start </button>
+                </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Life />,document.getElementById('test'));
+    </script>
+</body>
+
+</html>
